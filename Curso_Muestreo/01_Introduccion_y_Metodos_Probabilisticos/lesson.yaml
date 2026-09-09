@@ -1,0 +1,62 @@
+- Class: meta
+  Course: Curso_Muestreo
+  Lesson: Introduccion_y_Metodos_Probabilisticos
+  Author: Angel Loya
+  Type: Standard
+  Organization: UACJ
+  Version: 2.4.3
+
+- Class: text
+  Output: "Bienvenido a la primera lección del curso de Muestreo. Hoy exploraremos los conceptos básicos del muestreo y los métodos probabilísticos: aleatorio simple, sistemático y estratificado."
+
+- Class: text
+  Output: "Objetivo: Al finalizar esta lección, identificarás la importancia del muestreo, distinguirás entre población y muestra, y aplicarás tres métodos de muestreo probabilístico en R."
+
+- Class: text
+  Output: "Definición: El muestreo es el proceso de seleccionar un subconjunto de individuos (muestra) de una población con el fin de estimar características de la población (Martínez, 2020)."
+
+- Class: text
+  Output: "Muestreo aleatorio simple: Cada elemento de la población tiene la misma probabilidad de ser seleccionado (Devore, 2015). Es el método más básico y sirve como referencia para otros métodos."
+
+- Class: mult_question
+  Output: "¿Cuál es la principal ventaja del muestreo aleatorio simple?"
+  AnswerChoices: Es fácil de implementar;Permite estimar el error muestral;Es el método más preciso;Todas las anteriores
+  CorrectAnswer: Permite estimar el error muestral
+  AnswerTests: omnitest(correctVal='Permite estimar el error muestral')
+  Hint: Recuerda que la aleatoriedad permite calcular la variabilidad del estimador.
+
+- Class: text
+  Output: "Muestreo sistemático: Se selecciona un punto de inicio aleatorio y luego se eligen elementos a intervalos regulares (k = N/n). Es útil cuando la población está ordenada (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Ejercicio 1: Usando la población que se creó en initLesson.R, selecciona una muestra aleatoria simple de tamaño 10. Usa la función sample()."
+  CorrectAnswer: sample(poblacion, 10)
+  AnswerTests: omnitest(correctExpr='sample(poblacion, 10)')
+  Hint: La función sample(vector, tamaño) selecciona elementos aleatoriamente.
+
+- Class: text
+  Output: "Muestreo estratificado: Se divide la población en estratos homogéneos (según una característica) y se toma una muestra aleatoria simple de cada estrato. Mejora la precisión (Devore, 2015)."
+
+- Class: cmd_question
+  Output: "Ejercicio 2: Usando el data frame 'estudiantes' que se creó en initLesson.R, selecciona una muestra estratificada por semestre con 5 estudiantes por estrato. Usa la función sample() dentro de un split() o con la función stratified() si la tienes."
+  CorrectAnswer: do.call(rbind, lapply(split(estudiantes, estudiantes$semestre), function(x) x[sample(nrow(x), 5), ]))
+  AnswerTests: omnitest(correctExpr='do.call(rbind, lapply(split(estudiantes, estudiantes$semestre), function(x) x[sample(nrow(x), 5), ]))')
+  Hint: Divide el data frame por semestre, toma 5 de cada uno y vuelve a unir.
+
+- Class: mult_question
+  Output: "¿Cuándo es más apropiado usar muestreo estratificado en lugar de aleatorio simple?"
+  AnswerChoices: Cuando la población es homogénea;Cuando hay subgrupos naturales con diferencias importantes;Cuando la población es pequeña;Siempre es mejor
+  CorrectAnswer: Cuando hay subgrupos naturales con diferencias importantes
+  AnswerTests: omnitest(correctVal='Cuando hay subgrupos naturales con diferencias importantes')
+  Hint: Piensa en la representatividad de cada grupo.
+
+- Class: text
+  Output: "Resumen de métodos probabilísticos: Aleatorio simple (equiprobable), Sistemático (intervalos fijos), Estratificado (división en grupos). Todos buscan representatividad y permiten inferencia estadística."
+
+- Class: text
+  Output: "Fin de la lección 1. En la siguiente lección exploraremos métodos no probabilísticos y compararemos todos los métodos."
+
+# REFERENCIAS COMPLETAS (formato APA, solo visibles para quien edita el archivo):
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Martínez, L. O. (2020). Apuntes de Estadística. Universidad Autónoma de Ciudad Juárez.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

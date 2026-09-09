@@ -1,0 +1,68 @@
+- Class: meta
+  Course: Curso_Muestreo
+  Lesson: Aplicacion_Integral
+  Author: Angel Loya
+  Type: Standard
+  Organization: UACJ
+  Version: 2.4.3
+
+- Class: text
+  Output: "¡Bienvenido a la lección final! Aquí aplicarás todos los conceptos de muestreo y distribuciones muestrales en un problema de Ingeniería de Software."
+
+- Class: text
+  Output: "Contexto: Una empresa de software desea estimar el tiempo promedio de carga de su aplicación móvil. La población son 5000 usuarios registrados. Se te pide diseñar un plan de muestreo."
+
+- Class: cmd_question
+  Output: "Paso 1: Carga los datos de la población desde initLesson.R. Verifica que exista el data frame 'usuarios_app'. Si no, ejecuta: usuarios_app <- init_data() (esta función se definió en initLesson)."
+  CorrectAnswer: usuarios_app <- init_data()
+  AnswerTests: omnitest(correctExpr='usuarios_app <- init_data()')
+  Hint: La función init_data() está en initLesson.R.
+
+- Class: mult_question
+  Output: "¿Qué método de muestreo recomendarías para garantizar representatividad y poder inferir sobre la población?"
+  AnswerChoices: Aleatorio simple;Estratificado por dispositivo;Conglomerados por región;Conveniencia
+  CorrectAnswer: Estratificado por dispositivo
+  AnswerTests: omnitest(correctVal='Estratificado por dispositivo')
+  Hint: Piensa en los grupos naturales que podrían afectar el tiempo de carga.
+
+- Class: cmd_question
+  Output: "Paso 2: Selecciona una muestra estratificada de 30 usuarios (10 de cada dispositivo: Móvil, Laptop, Tablet). Usa la función que aprendiste en la lección 1."
+  CorrectAnswer: muestra <- do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), 10), ]))
+  AnswerTests: omnitest(correctExpr='muestra <- do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), 10), ]))')
+  Hint: Divide por dispositivo, toma 10 de cada uno y vuelve a unir.
+
+- Class: cmd_question
+  Output: "Paso 3: Calcula la media del tiempo de carga en tu muestra."
+  CorrectAnswer: mean(muestra$tiempo_carga)
+  AnswerTests: omnitest(correctExpr='mean(muestra$tiempo_carga)')
+  Hint: Usa mean() sobre la columna tiempo_carga.
+
+- Class: text
+  Output: "Distribución muestral: Ahora repetiremos el muestreo muchas veces para ver la variabilidad de la media."
+
+- Class: cmd_question
+  Output: "Paso 4: Repite el proceso de muestreo estratificado 100 veces, calculando la media cada vez. Guarda los resultados en 'medias_muestreo'."
+  CorrectAnswer: medias_muestreo <- replicate(100, mean(do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), 10), ]))$tiempo_carga))
+  AnswerTests: omnitest(correctExpr='medias_muestreo <- replicate(100, mean(do.call(rbind, lapply(split(usuarios_app, usuarios_app$dispositivo), function(x) x[sample(nrow(x), 10), ]))$tiempo_carga))')
+  Hint: Reutiliza el código del paso 2 dentro de replicate.
+
+- Class: text
+  Output: "Interpretación: La distribución de las medias muestrales se aproxima a una normal (TLC). Su desviación estándar es el error estándar. Con esto podemos construir intervalos de confianza."
+
+- Class: mult_question
+  Output: "¿Cuál es el principal beneficio de usar muestreo estratificado en este problema?"
+  AnswerChoices: Reduce el sesgo por dispositivo;Asegura que todos los dispositivos estén representados;Ambas a) y b);Ninguna
+  CorrectAnswer: Ambas a) y b)
+  AnswerTests: omnitest(correctVal='Ambas a) y b)')
+  Hint: El estratificado garantiza representación de todos los grupos.
+
+- Class: text
+  Output: "Conclusión: Has aplicado muestreo estratificado, calculado estadísticos y analizado su distribución muestral en un contexto real de software. ¡Excelente trabajo!"
+
+- Class: text
+  Output: "Fin del curso. Has completado todas las lecciones de muestreo."
+
+# REFERENCIAS COMPLETAS:
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Martínez, L. O. (2020). Apuntes de Estadística. Universidad Autónoma de Ciudad Juárez.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

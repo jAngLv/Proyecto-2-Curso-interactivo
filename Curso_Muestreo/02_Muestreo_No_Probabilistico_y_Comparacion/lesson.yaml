@@ -1,0 +1,60 @@
+- Class: meta
+  Course: Curso_Muestreo
+  Lesson: Muestreo_No_Probabilistico_y_Comparacion
+  Author: Angel Loya
+  Type: Standard
+  Organization: UACJ
+  Version: 2.4.3
+
+- Class: text
+  Output: "Bienvenido a la lección 2. Aquí estudiaremos el muestreo por conglomerados y el muestreo por conveniencia, y compararemos todos los métodos de muestreo."
+
+- Class: text
+  Output: "Muestreo por conglomerados: Se divide la población en grupos (conglomerados) y se seleccionan algunos conglomerados al azar. Luego se estudian todos los elementos de esos conglomerados (Walpole et al., 2016)."
+
+- Class: text
+  Output: "Diferencia clave: En estratificado, todos los estratos están representados; en conglomerados, solo se seleccionan algunos conglomerados. El estratificado es más preciso, el conglomerado es más práctico cuando los grupos son naturales (Devore, 2015)."
+
+- Class: mult_question
+  Output: "¿Cuál de las siguientes situaciones es más adecuada para muestreo por conglomerados?"
+  AnswerChoices: Encuesta a estudiantes de una escuela seleccionando aulas al azar;Encuesta a clientes de una tienda seleccionando individuos al azar;Encuesta a hogares seleccionando calles al azar;Ambas a) y c)
+  CorrectAnswer: Ambas a) y c)
+  AnswerTests: omnitest(correctVal='Ambas a) y c)')
+  Hint: Busca situaciones donde los grupos naturales (aulas, calles) sean fáciles de muestrear.
+
+- Class: text
+  Output: "Muestreo por conveniencia: Selecciona elementos disponibles o de fácil acceso. Es rápido y económico, pero NO es representativo y NO permite inferencia estadística (Martínez, 2020)."
+
+- Class: mult_question
+  Output: "¿Cuál es el principal riesgo del muestreo por conveniencia?"
+  AnswerChoices: Es costoso;No es representativo;Es difícil de implementar;Requiere mucho tiempo
+  CorrectAnswer: No es representativo
+  AnswerTests: omnitest(correctVal='No es representativo')
+  Hint: La facilidad de acceso no garantiza que la muestra refleje a la población.
+
+- Class: text
+  Output: "Comparación: Probabilísticos (aleatorio simple, sistemático, estratificado, conglomerados) permiten inferencia. No probabilísticos (conveniencia) son útiles para estudios exploratorios o cuando no se requiere generalización (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Ejercicio: Usando el data frame 'estudiantes' de la lección anterior, simula un muestreo por conglomerados seleccionando 2 semestres al azar y tomando todos los estudiantes de esos semestres."
+  CorrectAnswer: conglomerados <- estudiantes[estudiantes$semestre %in% sample(unique(estudiantes$semestre), 2), ]
+  AnswerTests: omnitest(correctExpr='conglomerados <- estudiantes[estudiantes$semestre %in% sample(unique(estudiantes$semestre), 2), ]')
+  Hint: Usa sample() para elegir semestres y luego filtra el data frame.
+
+- Class: mult_question
+  Output: "En una encuesta de satisfacción de usuarios de una app, se publica un enlace en redes sociales y solo responden quienes quieren. ¿Qué tipo de muestreo es?"
+  AnswerChoices: Aleatorio simple;Por conveniencia;Estratificado;Sistemático
+  CorrectAnswer: Por conveniencia
+  AnswerTests: omnitest(correctVal='Por conveniencia')
+  Hint: Los participantes se autoseleccionan, no hay aleatoriedad.
+
+- Class: text
+  Output: "Resumen: Los métodos probabilísticos son la base de la inferencia estadística. Los no probabilísticos son útiles en etapas exploratorias. La elección del método depende del objetivo, recursos y población (Martínez, 2020)."
+
+- Class: text
+  Output: "Fin de la lección 2. En la siguiente lección exploraremos las distribuciones muestrales."
+
+# REFERENCIAS COMPLETAS:
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Martínez, L. O. (2020). Apuntes de Estadística. Universidad Autónoma de Ciudad Juárez.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.

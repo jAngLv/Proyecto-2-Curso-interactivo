@@ -1,0 +1,52 @@
+- Class: meta
+  Course: Curso_Muestreo
+  Lesson: Distribuciones_Muestrales
+  Author: Angel Loya
+  Type: Standard
+  Organization: UACJ
+  Version: 2.4.3
+
+- Class: text
+  Output: "Bienvenido a la lección 3. Hoy estudiaremos las distribuciones muestrales de la media, proporción y varianza. Veremos cómo se comportan los estadísticos al repetir el muestreo."
+
+- Class: text
+  Output: "Distribución muestral de la media: Es la distribución de todas las medias posibles que se obtendrían al tomar muestras del mismo tamaño de una población. Su media es la media poblacional y su desviación estándar es el error estándar (Devore, 2015)."
+
+- Class: text
+  Output: "Teorema del Límite Central: Para muestras grandes (n ≥ 30), la distribución muestral de la media se aproxima a una normal, independientemente de la distribución de la población (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Ejercicio: Usando la población 'estudiantes' del initLesson de la lección 1, extrae 100 muestras de tamaño 5, calcula la media de cada muestra y guarda los resultados en un vector llamado 'medias_muestrales'."
+  CorrectAnswer: medias_muestrales <- replicate(100, mean(sample(estudiantes$promedio, 5)))
+  AnswerTests: omnitest(correctExpr='medias_muestrales <- replicate(100, mean(sample(estudiantes$promedio, 5)))')
+  Hint: Usa replicate(n, expresion) para repetir el muestreo.
+
+- Class: text
+  Output: "Distribución muestral de la proporción: Se aplica cuando la variable de interés es binaria (éxito/fracaso). La proporción muestral p̂ es el estadístico. Su distribución se aproxima a una normal cuando np ≥ 5 y n(1-p) ≥ 5 (Martínez, 2020)."
+
+- Class: mult_question
+  Output: "Si la población tiene una varianza poblacional σ² conocida, ¿cuál es la varianza de la distribución muestral de la media (Devore, 2015)?"
+  AnswerChoices: σ²/n;σ²;σ/√n;nσ²
+  CorrectAnswer: σ²/n
+  AnswerTests: omnitest(correctVal='σ²/n')
+  Hint: Recuerda la fórmula del error estándar al cuadrado.
+
+- Class: text
+  Output: "Distribución muestral de la varianza: La varianza muestral s² es un estimador de la varianza poblacional. Su distribución se relaciona con la chi-cuadrado cuando la población es normal (Walpole et al., 2016)."
+
+- Class: cmd_question
+  Output: "Ejercicio: Usando la misma población 'estudiantes', extrae 200 muestras de tamaño 10 y calcula la varianza de cada muestra. Guarda en 'varianzas'."
+  CorrectAnswer: varianzas <- replicate(200, var(sample(estudiantes$promedio, 10)))
+  AnswerTests: omnitest(correctExpr='varianzas <- replicate(200, var(sample(estudiantes$promedio, 10)))')
+  Hint: Usa var() para calcular la varianza.
+
+- Class: text
+  Output: "Resumen: Hemos visto que la media, proporción y varianza tienen distribuciones muestrales con propiedades específicas. Estas distribuciones son la base de la inferencia estadística."
+
+- Class: text
+  Output: "Fin de la lección 3. En la última lección aplicarás todo lo aprendido en un problema integrador de Ingeniería de Software."
+
+# REFERENCIAS COMPLETAS:
+# Devore, J. L. (2015). Probability and Statistics for Engineering and the Sciences (9th ed.). Cengage Learning.
+# Martínez, L. O. (2020). Apuntes de Estadística. Universidad Autónoma de Ciudad Juárez.
+# Walpole, R. E., Myers, R. H., Myers, S. L., & Ye, K. (2016). Probability & Statistics for Engineers & Scientists (9th ed.). Pearson.
